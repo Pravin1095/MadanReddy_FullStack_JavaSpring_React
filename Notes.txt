@@ -2,3 +2,25 @@ First in spring.start.io webpage choose the dependency Spring web and generate y
 Open the project in Intellij
 
 The file that contains @SpringBootApplication is the main file
+
+Maven :
+
+It helps to install dependencis for spring projects. Just like npm for Nodemodules
+
+pom.xml :
+
+It is file where we can see all our dependencies to our project. It is similar to package.json in frontend.
+Create a dependencies tag and inside that declare all dependencies. Search for spring context maven dependency.
+Click on version 6.2.3 and copy the maven dependency and paste in pom.xml and sync the mave changes
+
+Annotation:
+
+@Configuration:
+
+With this annotation we say the spring framework to always come to this file that has this configuration annotation that we have written some configuration like what bean to be created and so on
+
+@Bean:
+
+With this annotation we say that whatever object that we return from the below function , we need to convert that object to a bean and maintain its lifecycle through out the framework. The name of the bean will be the name of the method that is returning the object. Also we can able to give custom names to our beans
+
+Now we create a main method and iseApplicationContext which is the spring ioc container and with that we search for ApplicationContext under classes and we see there are 12 implementations of ApplicationContext. We choose AnnotationConfigApplicationContext as we are using annotations. Inside this we need to define the class name where our ProjectConfig are present, By doing this it gets into ProjectConfig and checks for Annotations and does the function as per the annotations
