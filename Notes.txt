@@ -1,0 +1,4 @@
+First in spring.start.io webpage choose the dependency Spring web and generate your project
+Open the project in Intellij
+
+The file that contains @SpringBootApplication is the main file
