@@ -1,3 +1,7 @@
+Github link :
+
+https://github.com/eazybytes/fullstack-react-springboot
+
 First in spring.start.io webpage choose the dependency Spring web and generate your project
 Open the project in Intellij
 
@@ -24,3 +28,53 @@ With this annotation we say the spring framework to always come to this file tha
 With this annotation we say that whatever object that we return from the below function , we need to convert that object to a bean and maintain its lifecycle through out the framework. The name of the bean will be the name of the method that is returning the object. Also we can able to give custom names to our beans
 
 Now we create a main method and iseApplicationContext which is the spring ioc container and with that we search for ApplicationContext under classes and we see there are 12 implementations of ApplicationContext. We choose AnnotationConfigApplicationContext as we are using annotations. Inside this we need to define the class name where our ProjectConfig are present, By doing this it gets into ProjectConfig and checks for Annotations and does the function as per the annotations
+
+NoUniqueBeanDefinitionException:
+
+This error occurs when we create multiple beans of same datatype . Eg: If we create 3 beans for same Vehicle datatype with different method name , it throws the above error stating "expected single matching bean instead found 3".
+Hence to avoid this we need to pass the bean name which is the method name as 1st parameter to getBean method
+
+Custom names to beans:
+
+We can provide custom names to our beans by having the names inside the bracket next to the bean annotation Eg: @Bean(name="audivehicle"), @Bean(value="ferrarivehicle"), @Bean("hondavehicle)
+
+Field and setter Injection:
+Primary Annotation:
+
+@Autowired is set above the dependent bean of the class or the constructor. Hence when @Annotation is found the dependent bean is first created and then comes to the class.
+
+When you have multiple beans of same kind inside the Spring context, you can make one of them primary using @Primary Annotaion. Primary bean is the one which Spring will choose if it has multiple options and you don't specify a name. In other words it is the default Bean that spring Context will consider in case of confusion due to multiple beans present of same type
+
+Drawbacks of Annotation: 
+
+As we are using Autowired we could not use final to make the object instance immutable. By not making it immutable we are creating a risk of security.
+
+Constructor Injection:
+
+This is the best approach as it overcomes the drawback of field injection. Here we can mark the dependencies of the Vehicle which is the Engine instance to be final so they become immutable . We declare a constructor that gets Engine instance and set it in this constructor.
+
+Singleton bean scope: 
+
+This means that if we try to create two beans of same class then the object reference will be same for both . This is singleton scope of bean. In this way we can have one service class created and all logic inside that and it has a unique object reference.
+
+Eager Loading:
+
+Whenever the context is created, the beans of the classes are loaded immediately. when this line var context = new AnnotationConfigApplicationContext(ProjectConfig.class). When this is executed the bean is loaded immediately and we can see output of the ServiceClass constructor in it.
+
+This can be prevented by using @Lazy annotation. This one does not load the bean immediately. Now we couldn't see output when the above line completed.So only when getBean is called the IOC container creates a bean.
+
+Prototype scoping:
+
+As per singleton approach, user1 and user2 (Prototype_Scope file) will be referring to the same bean and hence they will be having an equal id. But we would need different ids for different end user as per our logic. Hence we should be giving @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+
+Tip:
+
+If we are having a stateless bean which is there is no data to get from it then we can have singleton scope else if we are using a data for different users, we need to go with Prototype scope
+
+
+Section 7 : 
+Springboot for backend: 
+
+After finishing our setup in spring.start.io page when we debug we can see that our app has started in default Tomcat server in port 8080. 
+
+If we want to use custom port instead of 8080, go to resources=>application.properties. go and type server.port = 8081 and save and now application starts in 8081. If we use server.port  = 0 then app starts in random port number. The reason to start in random port is we can start multiple instance of our app and can test it

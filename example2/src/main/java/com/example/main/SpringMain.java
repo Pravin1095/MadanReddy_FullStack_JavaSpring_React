@@ -8,14 +8,14 @@ public class SpringMain {
 
     public static void main(String[] args) {
 var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
-Vehicle vehicle = context.getBean("teslavehicle",Vehicle.class);
-System.out.println("Vehicle name " +  vehicle.getName());
+Vehicle vehicle = context.getBean(Vehicle.class);
+System.out.println("Primary vehicle name from spring context is " +  vehicle.getName());
 
-        Vehicle audivehicle = context.getBean("audivehicle",Vehicle.class);
-        System.out.println("Vehicle name " +  audivehicle.getName());
-
-        Vehicle benzvehicle = context.getBean("benzvehicle",Vehicle.class);
-        System.out.println("Vehicle name " +  benzvehicle.getName());
+//        Vehicle audivehicle = context.getBean("audivehicle",Vehicle.class);
+//        System.out.println("Vehicle name " +  audivehicle.getName());
+//
+//        Vehicle benzvehicle = context.getBean("benzvehicle",Vehicle.class);
+//        System.out.println("Vehicle name " +  benzvehicle.getName());
 
 
         String hello = context.getBean(String.class);
